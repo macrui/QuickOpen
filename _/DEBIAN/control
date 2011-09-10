@@ -1,9 +1,10 @@
 Package: com.cykey.quickopen
 Name: QuickOpen
 Depends: mobilesubstrate, preferenceloader, com.hackulo.us.installous
-Version: 0.0.2
+Version: 0.0.2-3
 Architecture: iphoneos-arm
 Description: Adds an installs button to the appstore.
 Maintainer: Cykey
 Author: Cykey
 Section: Tweaks
+Installed-Size: 40

@@ -12,14 +12,23 @@ static long long int app;
 static id openButton = nil;
 
 %hook ASApplicationPageView
-
+//(231,8,80,25)
 - (id)initWithFrame:(CGRect)frame {
-       NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.cykey.quickopensettings.plist"];
-
-       if ([[dict objectForKey:@"Enabled"] boolValue])
+       
+	BOOL enabled;
+	if(![[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Library/Preferences/com.cykey.quickopensettings.plist"]){
+		enabled = (BOOL)YES;
+	}
+	else{
+		NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.cykey.quickopensettings.plist"];
+		enabled = [[dict objectForKey:@"Enabled"] boolValue];
+		[dict release];
+	}
+	
+       if (enabled)
        {
         %orig;
-	openButton = [[(Class)objc_getClass("SUItemOfferButton") alloc] initWithFrame:CGRectMake(231,8,80,25)];
+	openButton = [[(Class)objc_getClass("SUItemOfferButton") alloc] initWithFrame:CGRectMake(231,70,80,25)];
 	[openButton setTitle:@"Installous" forState:UIControlStateNormal];
 	[openButton addTarget:self action:@selector(open) forControlEvents:UIControlEventTouchUpInside];
 	[openButton setTag:1337];
@@ -31,7 +40,6 @@ static id openButton = nil;
 return %orig;
 }
 
-    [dict release];
 }
 
 - (void)addSubview:(UIView *)sub {
@@ -64,3 +72,4 @@ return %orig;
 	%orig;
 } 
 %end
+

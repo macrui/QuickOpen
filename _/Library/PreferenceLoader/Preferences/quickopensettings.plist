@@ -1,0 +1,10 @@
+{
+    entry = {
+	bundle = quickopensettings;
+	cell = PSLinkCell;
+	detail = quickopensettingsListController;
+	icon = quickopensettings.png;
+	isController = 1;
+	label = QuickOpen;
+    };
+}
