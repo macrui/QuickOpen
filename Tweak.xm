@@ -12,7 +12,6 @@ static long long int app;
 static id openButton = nil;
 
 %hook ASApplicationPageView
-//(231,8,80,25)
 - (id)initWithFrame:(CGRect)frame {
        
 	BOOL enabled;
