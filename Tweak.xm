@@ -11,6 +11,14 @@ static long long int app;
 
 static id openButton = nil;
 
+%hook ASApplicationPageHeaderView
+
+-(void)_reloadTitleSizeForBounds:(CGRect)bounds {
+    %orig(CGRectMake(0,0, bounds.size.width - 100, bounds.size.height));
+//Thanks Nighthawk for this.
+}
+
+%end
 %hook ASApplicationPageView
 - (id)initWithFrame:(CGRect)frame {
        
@@ -27,11 +35,11 @@ static id openButton = nil;
        if (enabled)
        {
         %orig;
-	openButton = [[(Class)objc_getClass("SUItemOfferButton") alloc] initWithFrame:CGRectMake(231,70,80,25)];
+	openButton = [[(Class)objc_getClass("SUItemOfferButton") alloc] initWithFrame:CGRectMake(231,8,80,25)];
 	[openButton setTitle:@"Installous" forState:UIControlStateNormal];
 	[openButton addTarget:self action:@selector(open) forControlEvents:UIControlEventTouchUpInside];
 	[openButton setTag:1337];
-	[self addSubview: openButton];
+	[self addSubview:openButton];
 	[openButton release];        
 	return self;
         }
