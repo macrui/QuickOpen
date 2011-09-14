@@ -18,7 +18,16 @@ static id openButton = nil;
 //Thanks Nighthawk for this.
 }
 
+- (void)setItem:(id)fp8 {
+%orig;
+id SUItemOfferButton = MSHookIvar<id>(self, "_offerButton");
+if(!SUItemOfferButton) return;
+ NSString* suitem=[suitem title];
+ NSLog(@"got button width; %@", suitem);
+}
+
 %end
+
 %hook ASApplicationPageView
 - (id)initWithFrame:(CGRect)frame {
        
@@ -77,6 +86,7 @@ return %orig;
 		[openButton setHidden:YES];
 	}
 	%orig;
+NSLog(@"got button widthhhhhhhh; %@", title);
 } 
 %end
 
