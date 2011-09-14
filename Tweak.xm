@@ -18,14 +18,6 @@ static id openButton = nil;
 //Thanks Nighthawk for this.
 }
 
-- (void)setItem:(id)fp8 {
-%orig;
-id SUItemOfferButton = MSHookIvar<id>(self, "_offerButton");
-if(!SUItemOfferButton) return;
- NSString* suitem=[suitem title];
- NSLog(@"got button width; %@", suitem);
-}
-
 %end
 
 %hook ASApplicationPageView
@@ -69,8 +61,8 @@ return %orig;
 	if(!suitem) return;
 	long long int appid = [(SUItem__HAX *)suitem itemIdentifier];
 	app = appid;
-}
 
+}
 %new(v@:@:)
 - (void)open {
 	NSString *string = [NSString stringWithFormat:@"inst://applicationID=%lld", app];
@@ -82,11 +74,10 @@ return %orig;
 
 - (void)setOfferTitle:(id)title {
 
-	if ([title isEqualToString:@"FREE"] || [title isEqualToString:@"INSTALLED"]) { 
+	if ([title isEqualToString:@"FREE"] || [title isEqualToString:@"INSTALLED"] || [title isEqualToString:@"INSTALL"]) { 
 		[openButton setHidden:YES];
 	}
 	%orig;
-NSLog(@"got button widthhhhhhhh; %@", title);
 } 
 %end
 
